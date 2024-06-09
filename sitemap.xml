@@ -34,9 +34,6 @@
     <loc>/reference/calculateHotellingPValue.html</loc>
   </url>
   <url>
-    <loc>/reference/calculatePairwiseDistancesAndPlotDensity.html</loc>
-  </url>
-  <url>
     <loc>/reference/calculateSampleDistances.html</loc>
   </url>
   <url>
@@ -77,6 +74,9 @@
   </url>
   <url>
     <loc>/reference/plotMarkerExpression.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plotPairwiseDistancesDensity.html</loc>
   </url>
   <url>
     <loc>/reference/plotQCvsAnnotation.html</loc>

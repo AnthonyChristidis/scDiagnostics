@@ -396,7 +396,7 @@
 <p>The analysis offers the flexibility to select a particular cell type for examination, and users can choose between different distance metrics, such as “euclidean” or “manhattan,” to calculate pairwise distances.</p>
 <p>To illustrate, the function is applied to the cell type CD8 using the euclidean distance metric in the example below.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/calculatePairwiseDistancesAndPlotDensity.html">calculatePairwiseDistancesAndPlotDensity</a></span><span class="op">(</span>query_data <span class="op">=</span> <span class="va">query_data_subset</span>, </span>
+<code class="sourceCode R"><span><span class="fu">calculatePairwiseDistancesAndPlotDensity</span><span class="op">(</span>query_data <span class="op">=</span> <span class="va">query_data_subset</span>, </span>
 <span>                                         reference_data <span class="op">=</span> <span class="va">ref_data_subset</span>, </span>
 <span>                                         query_cell_type_col <span class="op">=</span> <span class="st">"labels"</span>, </span>
 <span>                                         ref_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span>, </span>
@@ -407,7 +407,7 @@
 <p>Alternatively, users can opt for the “correlation” distance metric, which measures the similarity in gene expression profiles between cells.</p>
 <p>To illustrate, the function is applied to the cell type CD8 using the correlation distance metric in the example below. By selecting either the “pearson” or “spearman” correlation method, users can emphasize either linear or rank-based associations, respectively.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/calculatePairwiseDistancesAndPlotDensity.html">calculatePairwiseDistancesAndPlotDensity</a></span><span class="op">(</span>query_data <span class="op">=</span> <span class="va">query_data_subset</span>, </span>
+<code class="sourceCode R"><span><span class="fu">calculatePairwiseDistancesAndPlotDensity</span><span class="op">(</span>query_data <span class="op">=</span> <span class="va">query_data_subset</span>, </span>
 <span>                                         reference_data <span class="op">=</span> <span class="va">ref_data_subset</span>, </span>
 <span>                                         query_cell_type_col <span class="op">=</span> <span class="st">"labels"</span>, </span>
 <span>                                         ref_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span>, </span>
