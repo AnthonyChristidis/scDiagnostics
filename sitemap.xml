@@ -28,6 +28,9 @@
     <loc>/reference/calculateCategorizationEntropy.html</loc>
   </url>
   <url>
+    <loc>/reference/calculateDiscriminantSpace.html</loc>
+  </url>
+  <url>
     <loc>/reference/calculateHVGOverlap.html</loc>
   </url>
   <url>
@@ -80,9 +83,6 @@
   </url>
   <url>
     <loc>/reference/plotQCvsAnnotation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/projectDiscriminantSpace.html</loc>
   </url>
   <url>
     <loc>/reference/projectPCA.html</loc>
