@@ -183,8 +183,7 @@ sizes could contribute to increased annotation confidence due to
 enhanced statistical power for identifying cell type-specific gene
 expression patterns, as evident in the scatter plot below.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># load reference dataset</span></span>
+<code class="sourceCode R"><span><span class="co"># load reference dataset</span></span>
 <span><span class="va">ref_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/celldex/man/fetchReference.html" class="external-link">fetchReference</a></span><span class="op">(</span><span class="st">"hpca"</span>, <span class="st">"2024-02-26"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load query dataset (Bunis haematopoietic stem and progenitor cell</span></span>
@@ -219,6 +218,7 @@ expression patterns, as evident in the scatter plot below.</p>
 <span>                         score_col <span class="op">=</span> <span class="st">"cell_scores"</span>,</span>
 <span>                         label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="va">p1</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Library Size"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="scDiagnostics_files/figure-html/QC-plot-QC-vs-Annotation-1-1.png" width="700"></p>
 <p>However, certain QC metrics, such as the proportion of mitochondrial
 genes, may require careful consideration as they can sometimes be
 associated with cellular states or functions rather than noise. The
@@ -275,6 +275,7 @@ macrophages and monocytes, adding biological context to our results.</p>
 <span>                         label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="va">p2</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">cols</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Subsets Mitochondrial Percentage (%)"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="scDiagnostics_files/figure-html/QC-plot-QC-vs-Annotation-2-1.png" width="700"></p>
 </div>
 <div class="section level3">
 <h3 id="examining-distribution-of-qc-stats-and-annotation-scores">Examining Distribution of QC stats and Annotation Scores<a class="anchor" aria-label="anchor" href="#examining-distribution-of-qc-stats-and-annotation-scores"></a>
@@ -302,6 +303,7 @@ gene expression profiles for the specific cell type.</p>
 <span>                   label_col <span class="op">=</span> <span class="st">"pred.labels"</span>, </span>
 <span>                   score_col <span class="op">=</span> <span class="st">"cell_scores"</span>, </span>
 <span>                   label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<p><img src="scDiagnostics_files/figure-html/hist-QC-vs-Annotation-1.png" width="700"></p>
 <p>The right-skewed distribution for mitochondrial percentages and a
 left-skewed distribution for annotation scores in above histograms
 suggest that most cells have lower mitochondrial contamination and
