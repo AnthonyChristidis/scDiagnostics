@@ -75,10 +75,21 @@
 </h1></div>
 </div>
 <div class="section level1">
-<h1 id="purpose">Purpose<a class="anchor" aria-label="anchor" href="#purpose"></a>
+<h1 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h1>
-<p>Annotation transfer from a reference dataset for the cell type annotation of a new query single-cell RNA-sequencing (scRNA-seq) experiment is an integral component of the typical analysis workflow. The approach provides a fast, automated, and reproducible alternative to the manual annotation of cell clusters based on marker gene expression. However, dataset imbalance and undiagnosed incompatibilities between query and reference dataset can lead to erroneous annotation and distort downstream applications.</p>
-<p>The <code>scDiagnostics</code> package provides functionality for the systematic evaluation of cell type assignments in scRNA-seq data. <code>scDiagnostics</code> offers a suite of diagnostic functions to assess whether both (query and reference) datasets are aligned, ensuring that annotations can be transferred reliably. <code>scDiagnostics</code> also provides functionality to assess annotation ambiguity, cluster heterogeneity, and marker gene alignment. The implemented functionality helps researchers to determine how accurately cells from a new scRNA-seq experiment can be assigned to known cell types.</p>
+<p>The accurate annotation of cell types is a critical step in single-cell RNA-sequencing (scRNA-seq) analysis. While annotation transfer from a reference dataset offers a convenient and automated approach, it can also introduce biases and errors if not performed carefully.</p>
+<p><strong><code>scDiagnostics</code></strong> is an R package designed to address this challenge by providing a comprehensive set of diagnostic tools for evaluating the quality of cell type annotations in scRNA-seq data. With <strong><code>scDiagnostics</code></strong>, researchers can systematically assess the compatibility and accuracy of annotations, ensuring reliable and reproducible results in their scRNA-seq analysis workflow.</p>
+</div>
+<div class="section level1">
+<h1 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
+</h1>
+<ul>
+<li><p><strong>Systematic Evaluation</strong>: <strong><code>scDiagnostics</code></strong> offers a suite of functions to evaluate the quality of cell type annotations in scRNA-seq data. This includes assessing dataset imbalance, detecting incompatibilities between query and reference datasets, and identifying potential annotation errors.</p></li>
+<li><p><strong>Annotation Accuracy</strong>: The package helps ensure accurate cell type annotations by providing tools to assess annotation ambiguity and cluster heterogeneity. Researchers can identify ambiguous or mixed cell populations and adjust annotations accordingly.</p></li>
+<li><p><strong>Marker Gene Alignment</strong>: Proper marker gene alignment is crucial for consistent cell type definitions. <strong><code>scDiagnostics</code></strong> enables the comparison of marker genes between query and reference datasets, ensuring that annotations are based on consistent and reliable markers.</p></li>
+<li><p><strong>Detection of Dataset Incompatibilities</strong>: Incompatibilities between query and reference datasets can lead to erroneous annotations. <strong><code>scDiagnostics</code></strong> provides functionality to identify and address these incompatibilities, ensuring that annotations can be reliably transferred.</p></li>
+<li><p><strong>Cluster Heterogeneity Assessment</strong>: The package includes functions to assess the heterogeneity within annotated clusters. This helps researchers identify clusters that may contain multiple cell types or outlier cells, allowing for more accurate and refined annotations.</p></li>
+</ul>
 </div>
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -92,6 +103,12 @@
 <code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"ccb-hms/scDiagnostics"</span>,</span>
 <span>                     build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                     dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level1">
+<h1 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h1>
+<p>To get an overview of the functionality of the package, refer to the <a href="https://ccb-hms.github.io/scDiagnostics/index.html" class="external-link">pkgdown website</a> for code examples. The complete documentation of each available function in <code>scDiagnostics</code>, which includes implementation details and working examples, is available in the <a href="https://ccb-hms.github.io/scDiagnostics/reference/index.html" class="external-link">reference tab</a>.</p>
+<p><strong><code>scDiagnostics</code></strong> is designed to be user-friendly and integrates seamlessly into any scRNA-seq analysis workflow. By providing robust diagnostic tools, the package helps ensure the accuracy and reliability of cell type annotations, leading to more meaningful and reproducible results.</p>
 </div>
 
   </div>
