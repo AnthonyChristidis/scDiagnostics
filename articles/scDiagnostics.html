@@ -840,11 +840,12 @@ reference datasets.</p>
 <h3 id="calculate-nearest-neighbor-diagnostics-for-cell-type-classification">Calculate Nearest Neighbor Diagnostics for Cell Type
 Classification<a class="anchor" aria-label="anchor" href="#calculate-nearest-neighbor-diagnostics-for-cell-type-classification"></a>
 </h3>
-<p>The nearestNeighborDiagnostics function is designed to compute the
-probabilities that each sample in a query dataset belongs to either the
-reference or the query dataset for each cell type using nearest neighbor
-analysis. This function is particularly useful for evaluating the
-consistency of cell type classification across datasets.</p>
+<p>The calculateNearestNeighborProbabilities function is designed to
+compute the probabilities that each sample in a query dataset belongs to
+either the reference or the query dataset for each cell type using
+nearest neighbor analysis. This function is particularly useful for
+evaluating the consistency of cell type classification across
+datasets.</p>
 <p>This function projects the query data onto the PCA space of the
 reference data, balances the sample sizes between the reference and
 query datasets through data augmentation if necessary, and calculates
@@ -861,10 +862,10 @@ highlight the need for further investigation into the composition and
 quality of the query dataset, possibly revealing the presence of
 unexpected or mislabeled cells.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nn_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nearestNeighborDiagnostics.html">nearestNeighborDiagnostics</a></span><span class="op">(</span>query_data <span class="op">=</span> <span class="va">query_data_subset</span>, </span>
-<span>                                        reference_data <span class="op">=</span> <span class="va">ref_data_subset</span>,</span>
-<span>                                        query_cell_type_col <span class="op">=</span> <span class="st">"labels"</span>, </span>
-<span>                                        ref_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">nn_output</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calculateNearestNeighborProbabilities.html">calculateNearestNeighborProbabilities</a></span><span class="op">(</span>query_data <span class="op">=</span> <span class="va">query_data_subset</span>, </span>
+<span>                                                   reference_data <span class="op">=</span> <span class="va">ref_data_subset</span>,</span>
+<span>                                                   query_cell_type_col <span class="op">=</span> <span class="st">"labels"</span>, </span>
+<span>                                                   ref_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot output</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">nn_output</span><span class="op">)</span></span></code></pre></div>
@@ -1249,8 +1250,8 @@ other attached packages:
 
 loaded via a namespace (and not attached):
   [1] BiocIO_1.14.0             bitops_1.0-7             
-  [3] filelock_1.0.3            R.oo_1.26.0              
-  [5] tibble_3.2.1              graph_1.82.0             
+  [3] filelock_1.0.3            tibble_3.2.1             
+  [5] R.oo_1.26.0               graph_1.82.0             
   [7] XML_3.99-0.16.1           lifecycle_1.0.4          
   [9] httr2_1.0.1               edgeR_4.2.0              
  [11] isotree_0.6.1-1           lattice_0.22-6           

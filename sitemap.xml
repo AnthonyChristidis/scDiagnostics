@@ -34,6 +34,9 @@
     <loc>/reference/calculateHotellingPValue.html</loc>
   </url>
   <url>
+    <loc>/reference/calculateNearestNeighborProbabilities.html</loc>
+  </url>
+  <url>
     <loc>/reference/calculateSampleDistances.html</loc>
   </url>
   <url>
@@ -62,9 +65,6 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nearestNeighborDiagnostics.html</loc>
   </url>
   <url>
     <loc>/reference/plotGeneExpressionDimred.html</loc>
