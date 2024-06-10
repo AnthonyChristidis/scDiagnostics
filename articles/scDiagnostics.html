@@ -425,8 +425,7 @@ functional characteristics.</p>
 <span><span class="fu"><a href="../reference/plotGeneSetScores.html">plotGeneSetScores</a></span><span class="op">(</span>se_object <span class="op">=</span> <span class="va">query_data</span>, </span>
 <span>                  method <span class="op">=</span> <span class="st">"PCA"</span>, </span>
 <span>                  feature <span class="op">=</span> <span class="st">"geneSetScores"</span>,</span>
-<span>                  pc_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="scDiagnostics_files/figure-html/plot-Gene-Set-Scores-1.png" width="700"></p>
+<span>                  pc_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>In the provided example, we demonstrate the usage of the
 plotGeneSetScores function using the AUCell package to compute gene set
 or pathway scores. Custom gene sets are generated for demonstration
@@ -587,7 +586,6 @@ not fully capture the distinctions between these cell types.</p>
 <span>                     query_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span>, </span>
 <span>                     ref_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span>, </span>
 <span>                     pc_subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="scDiagnostics_files/figure-html/visualize-Cell-Type-PCA-1.png" width="700"></p>
 <p>The B and plasma cell types from the reference and query datasets do
 not overlap well in the PCA space. This lack of overlap could indicate
 discrepancies between the datasets, such as poor classification by
@@ -611,7 +609,10 @@ consistent across these datasets. This overlap indicates that the cell
 type characteristics are well captured and comparable between the
 datasets.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Boxplots of PCs</span></span>
+<code class="sourceCode R"><span><span class="co"># Run PCA on the reference data</span></span>
+<span><span class="va">ref_data_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocSingular/man/runPCA.html" class="external-link">runPCA</a></span><span class="op">(</span><span class="va">ref_data_subset</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Boxplots of PCs</span></span>
 <span><span class="fu"><a href="../reference/boxplotPCA.html">boxplotPCA</a></span><span class="op">(</span>query_data <span class="op">=</span> <span class="va">query_data_subset</span>, reference_data <span class="op">=</span> <span class="va">ref_data_subset</span>,</span>
 <span>           query_cell_type_col <span class="op">=</span> <span class="st">"labels"</span>, </span>
 <span>           ref_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span>, </span>
@@ -988,21 +989,21 @@ query samples and reference data.</p>
 <span>                                                       ref_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span><span class="op">)</span> </span>
 <span><span class="va">overlap_measures</span><span class="op">$</span><span class="va">bhattacharyya_coef</span></span>
 <span><span class="co">#&gt;               Sample B_and_plasma       CD8       CD4</span></span>
-<span><span class="co">#&gt; 1 CGTTGGGAGCTGAACG-1    0.2584233 0.9447935 0.5397216</span></span>
-<span><span class="co">#&gt; 2 AAACGGGCACATGACT-1    0.2875195 0.9706078 0.4892946</span></span>
-<span><span class="co">#&gt; 3 GGGACCTTCCCATTTA-1    0.3109462 0.9476774 0.7052183</span></span>
-<span><span class="co">#&gt; 4 ATTGGTGGTAACGCGA-1    0.4207154 0.4835584 0.5011162</span></span>
-<span><span class="co">#&gt; 5 CTGAAACAGACGCAAC-1    0.3084905 0.9116329 0.5798267</span></span>
-<span><span class="co">#&gt; 6 ATTGGACCATACTACG-1    0.2789674 0.9811063 0.5627595</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 AACTCCCAGTCCCACG-1    0.2838214 0.8965671 0.7743430</span></span>
+<span><span class="co">#&gt; 2 GGGACCTTCCCATTTA-1    0.3109462 0.9476774 0.7052183</span></span>
+<span><span class="co">#&gt; 3 CGTTGGGAGCTGAACG-1    0.2584233 0.9447935 0.5397216</span></span>
+<span><span class="co">#&gt; 4 CACCTTGGTTATGTGC-1    0.2541869 0.9914814 0.4618995</span></span>
+<span><span class="co">#&gt; 5 AAACGGGCACATGACT-1    0.2875195 0.9706078 0.4892946</span></span>
+<span><span class="co">#&gt; 6 ATTGGTGGTAACGCGA-1    0.4207154 0.4835584 0.5011162</span></span></code></pre></div>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">overlap_measures</span><span class="op">$</span><span class="va">hellinger_dist</span></span>
-<span><span class="co">#&gt;               Sample B_and_plasma       CD8       CD4</span></span>
-<span><span class="co">#&gt; 1 CGTTGGGAGCTGAACG-1    0.8611485 0.2349607 0.6784382</span></span>
-<span><span class="co">#&gt; 2 AAACGGGCACATGACT-1    0.8440856 0.1714414 0.7146366</span></span>
-<span><span class="co">#&gt; 3 GGGACCTTCCCATTTA-1    0.8300927 0.2287412 0.5429380</span></span>
-<span><span class="co">#&gt; 4 ATTGGTGGTAACGCGA-1    0.7611075 0.7186387 0.7063171</span></span>
-<span><span class="co">#&gt; 5 CTGAAACAGACGCAAC-1    0.8315705 0.2972660 0.6482078</span></span>
-<span><span class="co">#&gt; 6 ATTGGACCATACTACG-1    0.8491364 0.1374545 0.6612417</span></span></code></pre></div>
+<span><span class="co">#&gt;               Sample B_and_plasma        CD8       CD4</span></span>
+<span><span class="co">#&gt; 1 AACTCCCAGTCCCACG-1    0.8462733 0.32160979 0.4750337</span></span>
+<span><span class="co">#&gt; 2 GGGACCTTCCCATTTA-1    0.8300927 0.22874124 0.5429380</span></span>
+<span><span class="co">#&gt; 3 CGTTGGGAGCTGAACG-1    0.8611485 0.23496073 0.6784382</span></span>
+<span><span class="co">#&gt; 4 CACCTTGGTTATGTGC-1    0.8636047 0.09229603 0.7335533</span></span>
+<span><span class="co">#&gt; 5 AAACGGGCACATGACT-1    0.8440856 0.17144142 0.7146366</span></span>
+<span><span class="co">#&gt; 6 ATTGGTGGTAACGCGA-1    0.7611075 0.71863872 0.7063171</span></span></code></pre></div>
 <p>When employing the calculateSampleDistancesSimilarity function, the
 anomalous CD4+ T cells identified using detectAnomaly demonstrate
 intriguing patterns in their similarity measures. Specifically, these
