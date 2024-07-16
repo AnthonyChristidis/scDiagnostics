@@ -544,7 +544,6 @@ reference datasets.</p>
 <span>                reference_data <span class="op">=</span> <span class="va">ref_data_subset</span>, </span>
 <span>                query_cell_type_col <span class="op">=</span> <span class="st">"labels"</span>,</span>
 <span>                ref_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="scDiagnostics_files/figure-html/visualize-Cell-Type-MDS-1.png" width="700"></p>
 <p>Upon examining the MDS scatter plot, we observe that the CD4 and CD8
 cell types overlap to some extent.By observing the proximity or overlap
 of different cell types, one can gain insights into their potential
@@ -673,9 +672,8 @@ you have batch effects!</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot the PC data (no query data)</span></span>
-<span><span class="va">regress_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/regressPC.html">regressPC</a></span><span class="op">(</span>reference_data <span class="op">=</span> <span class="va">reference_data</span>,</span>
-<span>                         ref_cell_type_col <span class="op">=</span> <span class="st">"expert_annotation"</span>, </span>
-<span>                         cell_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CD4"</span>, <span class="st">"CD8"</span>, <span class="st">"B_and_plasma"</span>, <span class="st">"Myeloid"</span><span class="op">)</span>,</span>
+<span><span class="va">regress_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/regressPC.html">regressPC</a></span><span class="op">(</span>reference_data <span class="op">=</span> <span class="va">ref_data_subset</span>,</span>
+<span>                         ref_cell_type_col <span class="op">=</span> <span class="st">"reclustered.broad"</span>, </span>
 <span>                         pc_subset <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span>
 <span><span class="co"># Plot results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">regress_res</span>, plot_type <span class="op">=</span> <span class="st">"r_squared"</span><span class="op">)</span></span></code></pre></div>
