@@ -3,13 +3,10 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   AnnotationAnomalies: AnnotationAnomalies.html
-  CellDistancesDiagnostics: CellDistancesDiagnostics.html
   DatasetMarkerGeneAlignment: DatasetMarkerGeneAlignment.html
-  QCandAnnotationScores: QCandAnnotationScores.html
   scDiagnostics: scDiagnostics.html
-  StatisticalMeasures: StatisticalMeasures.html
   VisualizationTools: VisualizationTools.html
-last_built: 2024-10-09T06:30Z
+last_built: 2024-10-26T21:07Z
 urls:
   reference: https://ccb-hms.github.io/scDiagnostics/reference
   article: https://ccb-hms.github.io/scDiagnostics/articles
