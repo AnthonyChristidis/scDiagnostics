@@ -38,7 +38,6 @@ Imports:
     SummarizedExperiment,
     ranger,
     transport,
-    speedglm,
     cramer,
     rlang,
     bluster,
@@ -58,6 +57,7 @@ Suggests:
     scuttle,
     scater,
     dplyr,
+    TENxPBMCData,
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
