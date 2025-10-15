@@ -16,7 +16,8 @@ calculateSIRSpace(
   cumulative_variance_threshold = 0.7,
   n_neighbor = 1,
   assay_name = "logcounts",
-  max_cells = 2500
+  max_cells_query = 5000,
+  max_cells_ref = 5000
 )
 
 \method{plot}{calculateSIRSpaceObject}(
@@ -28,6 +29,8 @@ calculateSIRSpace(
   diagonal_facet = c("ridge", "density", "boxplot", "blank"),
   upper_facet = c("blank", "scatter", "contour", "ellipse"),
   n_top = 10,
+  max_cells_ref = NULL,
+  max_cells_query = NULL,
   ...
 )
 }
@@ -50,8 +53,11 @@ calculateSIRSpace(
 
 \item{assay_name}{A character string specifying the name of the assay on which to perform computations. Default is "logcounts".}
 
-\item{max_cells}{Maximum number of cells to retain. If the object has fewer cells, it is returned unchanged.
-Default is 2500.}
+\item{max_cells_query}{Maximum number of query cells to include in the plot. If NULL,
+all available query cells are plotted. Default is NULL. Only used when plot_type = "scores".}
+
+\item{max_cells_ref}{Maximum number of reference cells to include in the plot. If NULL,
+all available reference cells are plotted. Default is NULL. Only used when plot_type = "scores".}
 
 \item{x}{An object of class \code{calculateSIRSpaceObject} containing SIR projections.}
 

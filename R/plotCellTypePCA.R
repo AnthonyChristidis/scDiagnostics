@@ -18,8 +18,10 @@
 #' @param diagonal_facet Type of plot to use for the diagonal panels. Either "ridge" (default), "density", or "boxplot".
 #' @param upper_facet Type of plot to use for the upper panels. Either "blank" (default), "scatter", "contour", or "ellipse".
 #' @param assay_name Name of the assay on which to perform computations. Default is "logcounts".
-#' @param max_cells Maximum number of cells to retain. If the object has fewer cells, it is returned unchanged.
-#'                  Default is 2500.
+#' @param max_cells_query Maximum number of query cells to retain after cell type filtering. If NULL,
+#' no downsampling of query cells is performed. Default is 2000.
+#' @param max_cells_ref Maximum number of reference cells to retain after cell type filtering. If NULL,
+#' no downsampling of reference cells is performed. Default is 2000.
 #'
 #' @return A ggmatrix object representing a pairs plot of specified principal components for the given cell types and datasets.
 #'
@@ -36,42 +38,49 @@ plotCellTypePCA <- function(query_data,
                             lower_facet = c("scatter", "contour", "ellipse", "blank"),
                             diagonal_facet = c("ridge", "density", "boxplot"),
                             upper_facet = c("blank", "scatter", "contour", "ellipse"),
-                            max_cells = 2500){
+                            max_cells_query = 2000,
+                            max_cells_ref = 2000){
 
     # Check standard input arguments
     argumentCheck(query_data = query_data,
                   reference_data = reference_data,
                   query_cell_type_col = query_cell_type_col,
                   ref_cell_type_col = ref_cell_type_col,
-                  cell_types = cell_types,
                   pc_subset_ref = pc_subset,
-                  assay_name = assay_name)
+                  assay_name = assay_name,
+                  max_cells_query = max_cells_query,
+                  max_cells_ref = max_cells_ref)
 
-    # Downsample query and reference data
-    query_data <- downsampleSCE(sce = query_data,
-                                max_cells = max_cells)
-    reference_data <- downsampleSCE(sce = reference_data,
-                                    max_cells = max_cells)
+    # Convert cell type columns to character if needed
+    query_data <- convertColumnsToCharacter(sce_object = query_data,
+                                            convert_cols = query_cell_type_col)
+    reference_data <- convertColumnsToCharacter(sce_object = reference_data,
+                                                convert_cols = ref_cell_type_col)
 
     # Match diagonal_facet and upper_facet arguments
     lower_facet <- match.arg(lower_facet)
     diagonal_facet <- match.arg(diagonal_facet)
     upper_facet <- match.arg(upper_facet)
 
-    # Get common cell types if they are not specified by user
-    if(is.null(cell_types)){
-        cell_types <- na.omit(unique(c(reference_data[[ref_cell_type_col]],
-                                       query_data[[query_cell_type_col]])))
-    }
+    # Select cell types
+    cell_types <- selectCellTypes(query_data = query_data,
+                                  reference_data = reference_data,
+                                  query_cell_type_col = query_cell_type_col,
+                                  ref_cell_type_col = ref_cell_type_col,
+                                  cell_types = cell_types,
+                                  dual_only = FALSE,
+                                  n_cell_types = 10)
 
     # Get the projected PCA data
     pca_output <- projectPCA(query_data = query_data,
                              reference_data = reference_data,
                              query_cell_type_col = query_cell_type_col,
                              ref_cell_type_col = ref_cell_type_col,
+                             cell_types = cell_types,
                              pc_subset = pc_subset,
-                             assay_name = assay_name)
-    pca_output <- pca_output[pca_output[["cell_type"]] %in% cell_types,]
+                             assay_name = assay_name,
+                             max_cells_ref = max_cells_ref,
+                             max_cells_query = max_cells_query)
 
     # Create PC column names with variance explained
     plot_names <- paste0(

@@ -43,12 +43,13 @@ Imports:
     bluster,
     scales,
     MASS,
-    stringr
+    stringr,
+    Matrix,
+    grDevices
 Suggests:
     AUCell,
     BiocStyle,
     knitr,
-    Matrix,
     rmarkdown,
     scran,
     scRNAseq,

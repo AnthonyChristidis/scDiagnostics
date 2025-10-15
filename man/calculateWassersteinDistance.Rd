@@ -12,13 +12,14 @@ calculateWassersteinDistance(
   ref_cell_type_col,
   query_cell_type_col,
   cell_types = NULL,
-  pc_subset = 1:10,
+  pc_subset = 1:5,
   n_resamples = 300,
   assay_name = "logcounts",
-  max_cells = 2500
+  max_cells_query = 5000,
+  max_cells_ref = 5000
 )
 
-\method{plot}{calculateWassersteinDistanceObject}(x, cell_types = NULL, ...)
+\method{plot}{calculateWassersteinDistanceObject}(x, cell_types = NULL, bandwidth = NULL, ...)
 }
 \arguments{
 \item{query_data}{A \code{\linkS4class{SingleCellExperiment}} object containing a numeric expression matrix for the query cells.}
@@ -31,16 +32,21 @@ calculateWassersteinDistance(
 
 \item{cell_types}{A character vector specifying which cell types to plot. If NULL, all cell types are plotted.}
 
-\item{pc_subset}{A numeric vector specifying which principal components to use. Default is \code{1:10}.}
+\item{pc_subset}{A numeric vector specifying which principal components to use. Default is \code{1:5}.}
 
 \item{n_resamples}{An integer specifying the number of resamples to generate each distribution. Default is \code{300}.}
 
 \item{assay_name}{The name of the assay to use for computations. Default is \code{"logcounts"}.}
 
-\item{max_cells}{Maximum number of cells to retain. If the object has fewer cells, it is returned unchanged.
-Default is 2500.}
+\item{max_cells_query}{Maximum number of query cells to retain after cell type filtering. If NULL,
+no downsampling of query cells is performed. Default is 5000.}
+
+\item{max_cells_ref}{Maximum number of reference cells to retain after cell type filtering. If NULL,
+no downsampling of reference cells is performed. Default is 5000.}
 
 \item{x}{A list object containing the Wasserstein distance results from the \code{calculateWassersteinDistance} function.}
+
+\item{bandwidth}{A numeric value specifying the bandwidth for density estimation. If NULL (default), automatic bandwidth selection is used.}
 
 \item{...}{Additional arguments for future extensions.}
 }
@@ -60,8 +66,7 @@ a shared PCA space. It then computes the probability of superiority to assess wh
 reference-query distances tend to be larger than reference-reference distances.
 
 This function generates ridge plots comparing reference-reference
-and reference-query Wasserstein distance distributions for each cell type,
-along with the probability of superiority metric.
+and reference-query Wasserstein distance distributions for each cell type.
 }
 \details{
 The function projects the query dataset onto the PCA space defined by the reference dataset.
@@ -73,8 +78,7 @@ a randomly selected ref-ref distance.
 
 The function creates faceted ridge plots showing two clearly separated density curves for each
 cell type: one for the reference-reference distribution (null) and one for the
-reference-query distribution. The probability of superiority is displayed for each
-comparison, representing the probability that a ref-query distance exceeds a ref-ref distance.
+reference-query distribution.
 }
 \examples{
 # Load data
@@ -86,7 +90,7 @@ wasserstein_data <- calculateWassersteinDistance(query_data = query_data,
                                                  reference_data = reference_data,
                                                  query_cell_type_col = "expert_annotation",
                                                  ref_cell_type_col = "expert_annotation",
-                                                 pc_subset = 1:10,
+                                                 pc_subset = 1:5,
                                                  n_resamples = 100)
 plot(wasserstein_data)
 

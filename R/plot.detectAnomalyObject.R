@@ -26,6 +26,10 @@
 #' @param n_tree An integer specifying the number of trees for the isolation forest. Default is 500
 #' @param upper_facet Either "blank" (default), "contour", or "ellipse" for the upper facet plots.
 #' @param diagonal_facet Either "density" (default), "ridge", "boxplot" or "blank" for the diagonal plots.
+#' @param max_cells_ref Maximum number of reference cells to include in the plot. If NULL,
+#' all available reference cells are plotted. Default is NULL.
+#' @param max_cells_query Maximum number of query cells to include in the plot. If NULL,
+#' all available query cells are plotted. Default is NULL.
 #' @param ... Additional arguments passed to the `isolation.forest` function.
 #'
 #' @return The S3 plot method returns a \code{GGally::ggpairs} object representing the PCA plots with anomalies highlighted.
@@ -46,11 +50,13 @@ plot.detectAnomalyObject <- function(x,
                                      n_tree = 500,
                                      upper_facet = c("blank", "contour", "ellipse"),
                                      diagonal_facet = c("density", "ridge", "boxplot", "blank"),
+                                     max_cells_ref = NULL,
+                                     max_cells_query = NULL,
                                      ...) {
 
     # Check if PCA was used for computations
     if(!("var_explained" %in% names(x[[names(x)[1]]])))
-        stop("The plot function can only be used if 'n_components' is not NULL.")
+        stop("The plot function can only be used if \'pc_subset\' is not NULL when using \'detectAnomaly\'.")
 
     # Check input for upper_facet and diagonal_facet
     upper_facet <- match.arg(upper_facet)
@@ -67,14 +73,27 @@ plot.detectAnomalyObject <- function(x,
     # Check input for pc_subset
     if(!is.null(pc_subset)){
         if(!all(pc_subset %in% seq_len(
-            ncol(x[[cell_type]][["reference_mat_subset"]]))))
+            length(x[[cell_type]][["var_explained"]]))))
             stop("'pc_subset' is out of range.")
     } else{
-        pc_subset <- seq_len(ncol(x[[cell_type]][["reference_mat_subset"]]))
+        pc_subset <- seq_len(length(x[[cell_type]][["var_explained"]]))
     }
 
     # Check input for data_type
     data_type <- match.arg(data_type)
+
+    # Validate max_cells parameters
+    if (!is.null(max_cells_ref)) {
+        if (!is.numeric(max_cells_ref) || max_cells_ref <= 0 || max_cells_ref != as.integer(max_cells_ref)) {
+            stop("'max_cells_ref' must be a positive integer.")
+        }
+    }
+
+    if (!is.null(max_cells_query)) {
+        if (!is.numeric(max_cells_query) || max_cells_query <= 0 || max_cells_query != as.integer(max_cells_query)) {
+            stop("'max_cells_query' must be a positive integer.")
+        }
+    }
 
     # Filter and prepare data based on data type
     if(is.null(x[[cell_type]][["query_mat_subset"]]) && data_type == "query"){
@@ -84,10 +103,25 @@ plot.detectAnomalyObject <- function(x,
             data_subset <- x[[cell_type]][["query_mat_subset"]][, pc_subset,
                                                                 drop = FALSE]
             anomaly <- x[[cell_type]][["query_anomaly"]]
+
+            # Downsample query data if max_cells_query is specified
+            if(!is.null(max_cells_query) && nrow(data_subset) > max_cells_query){
+                sampled_indices <- sample(nrow(data_subset), max_cells_query)
+                data_subset <- data_subset[sampled_indices, , drop = FALSE]
+                anomaly <- anomaly[sampled_indices]
+            }
+
         } else if(data_type == "reference"){
             data_subset <- x[[cell_type]][["reference_mat_subset"]][, pc_subset,
                                                                     drop = FALSE]
             anomaly <- x[[cell_type]][["reference_anomaly"]]
+
+            # Downsample reference data if max_cells_ref is specified
+            if(!is.null(max_cells_ref) && nrow(data_subset) > max_cells_ref){
+                sampled_indices <- sample(nrow(data_subset), max_cells_ref)
+                data_subset <- data_subset[sampled_indices, , drop = FALSE]
+                anomaly <- anomaly[sampled_indices]
+            }
         }
     }
 
@@ -128,6 +162,7 @@ plot.detectAnomalyObject <- function(x,
         }
     }
 
+    # [All the plotting helper functions remain the same - they're unchanged from the original]
     # Function to create scatter plot with isolation forest background
     .anomalyScatterFunc <- function(data, mapping, ...){
         x_name <- rlang::as_name(mapping[["x"]])

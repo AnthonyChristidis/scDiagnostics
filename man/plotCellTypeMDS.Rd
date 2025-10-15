@@ -11,7 +11,8 @@ plotCellTypeMDS(
   ref_cell_type_col,
   cell_types = NULL,
   assay_name = "logcounts",
-  max_cells = 2500
+  max_cells_query = 5000,
+  max_cells_ref = 5000
 )
 }
 \arguments{
@@ -29,8 +30,11 @@ expression data and metadata.}
 
 \item{assay_name}{Name of the assay on which to perform computations. Default is "logcounts".}
 
-\item{max_cells}{Maximum number of cells to retain. If the object has fewer cells, it is returned unchanged.
-Default is 2500.}
+\item{max_cells_query}{Maximum number of query cells to retain after cell type filtering. If NULL,
+no downsampling of query cells is performed. Default is 5000.}
+
+\item{max_cells_ref}{Maximum number of reference cells to retain after cell type filtering. If NULL,
+no downsampling of reference cells is performed. Default is 5000.}
 }
 \value{
 A ggplot object representing the MDS scatter plot with cell type coloring.
@@ -39,10 +43,14 @@ A ggplot object representing the MDS scatter plot with cell type coloring.
 This function facilitates the assessment of similarity between reference and query datasets
 through Multidimensional Scaling (MDS) scatter plots. It allows the visualization of cell types,
 color-coded with user-defined custom colors, based on a dissimilarity matrix computed from a
-user-selected gene set.
+user-selected gene set. If MDS coordinates are precomputed in reducedDims, they will be used;
+otherwise, MDS will be computed from scratch.
 }
 \details{
-To evaluate dataset similarity, the function selects specific subsets of cells from
+The function first checks if MDS coordinates are available in the reducedDims of both datasets.
+If precomputed MDS is found, it uses those coordinates directly for visualization.
+
+If MDS is not precomputed, the function selects specific subsets of cells from
 both reference and query datasets. It then calculates Spearman correlations between gene expression profiles,
 deriving a dissimilarity matrix. This matrix undergoes Classical Multidimensional Scaling (MDS) for
 visualization, presenting cell types in a scatter plot, distinguished by colors defined by the user.

@@ -72,8 +72,8 @@
 #' plot(subspace_comparison)
 #'
 # Function to compare subspace spanned by top PCs in reference and query datasets
-comparePCASubspace <- function(reference_data,
-                               query_data,
+comparePCASubspace <- function(query_data,
+                               reference_data,
                                query_cell_type_col,
                                ref_cell_type_col,
                                pc_subset = 1:5,
@@ -88,6 +88,12 @@ comparePCASubspace <- function(reference_data,
                   pc_subset_query = pc_subset,
                   pc_subset_ref = pc_subset,
                   common_rotation_genes = TRUE)
+
+    # Convert cell type columns to character if needed
+    query_data <- convertColumnsToCharacter(sce_object = query_data,
+                                            convert_cols = query_cell_type_col)
+    reference_data <- convertColumnsToCharacter(sce_object = reference_data,
+                                                convert_cols = ref_cell_type_col)
 
     # Check if n_top_vars is a positive integer
     if (!is.numeric(n_top_vars) || n_top_vars <= 0 ||

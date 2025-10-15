@@ -7,18 +7,17 @@
 \title{Calculate Cell Similarity Using PCA Loadings}
 \usage{
 calculateCellSimilarityPCA(
-  se_object,
+  sce_object,
   cell_names,
   pc_subset = 1:5,
   n_top_vars = 50,
-  assay_name = "logcounts",
-  max_cells = 2500
+  assay_name = "logcounts"
 )
 
 \method{plot}{calculateCellSimilarityPCAObject}(x, pc_subset = 1:5, ...)
 }
 \arguments{
-\item{se_object}{A \code{\linkS4class{SingleCellExperiment}} object containing expression data.}
+\item{sce_object}{A \code{\linkS4class{SingleCellExperiment}} object containing expression data.}
 
 \item{cell_names}{A character vector specifying the cell names for which to compute the similarity.}
 
@@ -27,9 +26,6 @@ calculateCellSimilarityPCA(
 \item{n_top_vars}{An integer indicating the number of top loading variables to consider for each PC. Default is 50.}
 
 \item{assay_name}{Name of the assay on which to perform computations. Default is "logcounts".}
-
-\item{max_cells}{Maximum number of cells to retain. If the object has fewer cells, it is returned unchanged.
-Default is 2500.}
 
 \item{x}{An object of class `calculateCellSimilarityPCA` containing a dataframe of cosine similarity values
 between cells and PCs.}
