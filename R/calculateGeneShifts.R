@@ -65,27 +65,27 @@
 #' @author
 #' Anthony Christidis, \email{anthony-alexander_christidis@hms.harvard.edu}
 #'
-#' @seealso \code{\link{plot.calculateTopLoadingGeneShiftsObject}}, \code{\link{detectAnomaly}}
+#' @seealso \code{\link{plot.calculateGeneShiftsObject}}, \code{\link{detectAnomaly}}
 #'
 #' @importFrom stats wilcox.test var p.adjust na.omit setNames
 #'
 # Function to calculate expression shifts for genes with top loadings
-calculateTopLoadingGeneShifts <- function(query_data,
-                                          reference_data,
-                                          query_cell_type_col,
-                                          ref_cell_type_col,
-                                          cell_types = NULL,
-                                          pc_subset = 1:5,
-                                          n_top_loadings = 50,
-                                          p_value_threshold = 0.05,
-                                          adjust_method = "fdr",
-                                          assay_name = "logcounts",
-                                          detect_anomalies = FALSE,
-                                          anomaly_comparison = FALSE,
-                                          anomaly_threshold = 0.6,
-                                          n_tree = 500,
-                                          max_cells_query = 5000,
-                                          max_cells_ref = 5000) {
+calculateGeneShifts <- function(query_data,
+                                reference_data,
+                                query_cell_type_col,
+                                ref_cell_type_col,
+                                cell_types = NULL,
+                                pc_subset = 1:5,
+                                n_top_loadings = 50,
+                                p_value_threshold = 0.05,
+                                adjust_method = "fdr",
+                                assay_name = "logcounts",
+                                detect_anomalies = FALSE,
+                                anomaly_comparison = FALSE,
+                                anomaly_threshold = 0.6,
+                                n_tree = 500,
+                                max_cells_query = 5000,
+                                max_cells_ref = 5000) {
 
     # Check standard input arguments
     argumentCheck(query_data = query_data,
@@ -522,7 +522,7 @@ calculateTopLoadingGeneShifts <- function(query_data,
         final_results[["anomaly_results"]] <- anomaly_results
     }
 
-    class(final_results) <- c(class(final_results), "calculateTopLoadingGeneShiftsObject")
+    class(final_results) <- c(class(final_results), "calculateGeneShiftsObject")
     return(final_results)
 }
 
